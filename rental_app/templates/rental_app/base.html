@@ -1,0 +1,158 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styl.css' %}">
+    
+    <style>
+         
+    </style>
+</head>
+
+<body onload="keepon()">
+{% if messages %}
+{% for message in messages %}
+<div>{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+    
+    {% block content %} {% endblock %}
+    </body >
+<script>
+    let check1='{{ check }}';
+    const signIn = document.querySelector('#sign-in');
+    const signUp = document.querySelector('#sign-up');
+    const OverC = document.querySelector('#overlay-container');
+    const Over = document.querySelector('#overlay');
+    const OverLf = document.querySelector('#overlay-left');
+    const OverRg = document.querySelector('#overlay-right');
+    const cont = document.querySelector('.container');  
+    const SubDet =  document.getElementById('SubDet');  
+    const contE =  document.getElementById('contId');  
+    const CProfile = document.getElementById('CProfile');  
+    const Accounts = document.getElementById('Accounts');       
+    const close = document.getElementById('closingS');    
+    const closeBook = document.getElementById('closingBook');
+    const signUpBtn = document.getElementById('signUpBtn');
+    const signInBtn = document.getElementById('signInBtn');
+    const Prof = document.getElementById('Prof');
+    const SubD = document.getElementById('SubD');  
+    const book =  document.querySelector('#bookForm');  
+    const blockEl=document.getElementById('blockEl');
+     const blockElDv=document.getElementById('blockElDv');
+    const CReq = document.getElementById('CReq');
+    
+    const display=(function(){
+        function switchAcc_on(){
+            cont.style.display='block';
+            blockEl.style.display='block';
+            check1=true;}
+        function switchAcc_off(){
+            cont.style.display='none';
+            blockEl.style.display='none';
+            check1=false;}
+        function switch_to_SubD(){
+            SubDet.style.display="block";
+            CProfile.style.display="none";
+            CReq.style.display="none";}
+        function switch_to_Prof(){
+            SubDet.style.display="none";
+            CProfile.style.display="block";
+            CReq.style.display="none";
+            }
+        function switch_to_Creq(){
+            SubDet.style.display="none";
+            CProfile.style.display="none";
+            CReq.style.display="block";
+            
+            }
+        function switch_on_booking(){
+            blockEl.style.display='block';
+            book.style.display='block';
+        }
+        function switch_oof_booking(){
+            blockEl.style.display='none';
+            book.style.display='none';
+            check1='False';
+        }
+        function signUpBtn(){
+        signIn.style.zIndex='5';
+        signUp.style.zIndex= '10';         
+        signIn.style.transform='translateX(100%)';
+        signUp.style.transform='translateX(100%)';
+        OverC.style.transform='translateX(-100%)';
+        Over.style.transform='translateX(50%)';
+        
+        }
+        function signInBtn(){
+         signIn.style.zIndex='10';
+        signUp.style.zIndex= '5'; 
+        signIn.style.transform='translateX(0)';
+        signUp.style.transform='translateX(0)';
+        OverC.style.transform='translateX(0)';
+        Over.style.transform='translateX(0)';   
+        }
+        
+        return{
+            Accon:switchAcc_on,
+            Accoff:switchAcc_off,
+            Profon:switch_to_Prof,
+            SubDon:switch_to_SubD,
+            CReq:switch_to_Creq,
+            SUB:signUpBtn,
+            SIB:signInBtn,
+            Bookon:switch_on_booking,
+            Bookoof:switch_oof_booking
+        }
+
+    })();
+    window.addEventListener('click',function(event){
+        if(event.target==Accounts){
+            display.Accon();
+        }else if(event.target==close){
+            display.Accoff();  
+        }else if(event.target==Prof){
+            display.Profon();
+        }else if (event.target==SubD){
+            display.SubDon();            
+        }else if (event.target==CheckReq){
+            display.CReq();
+        }
+          });
+    
+    const keepon = ()=>{
+       if(check1 == 'True'){
+       display.Accon();
+       display.SUB();
+       check1='False'
+
+       }
+
+       else if(check1 == 'True2'){
+           display.Accon();
+           display.SIB();
+           check1='False'
+
+       }else if(check1 == 'True3'){
+           display.Bookon()
+           check1='False'
+            }
+       };
+    const allowBooking=()=>{
+        display.Bookon();
+
+    };
+   
+    
+    
+    signUpBtn.addEventListener('click',display.SUB)
+    signInBtn.addEventListener('click',display.SIB)
+    closeBook.addEventListener('click',display.Bookoof)
+    
+</script>
+
+
+</html>

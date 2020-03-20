@@ -1,0 +1,191 @@
+{% extends 'rental_app/base.html' %}
+{% block content %}
+<article id="blockEl">
+<div id="blockElDv">
+    </div>
+</article>
+    
+ <article class="navbar">
+        <ul style="display:flex;align-items:center;justify-content:flex-end">
+            <li style="margin-right:auto">Car Rental</li>
+            <li><a href="{% url 'rental_app-home' %}">Home</a></li>
+            <li><a id="Accounts" href="#" onclick="">Accounts</a></li>
+        </ul>
+    </article>
+    <article>
+        <div id="contId" class="container animate">
+        <span id="closingS" class='closing'>&times;</span>
+        
+            <div id="overlay-container">
+            
+                <div id="overlay">
+                
+                    <div id="overlay-left">
+                        <h2>Welcome Back!</h2>
+                        <p>Please login to access account</p>
+                        <button id="signInBtn" class="invert"  >Sign In</button>
+                    </div>
+                    <div id="overlay-right">
+                        <h2>Hellow there!</h2>
+                        <p>To offer hire services sign up to get account</p>
+                        <button id="signUpBtn" class="invert">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <form id="sign-up" method="POST">
+                <h2>Create login</h2>
+                {% csrf_token %}
+                {% for field in Regform %}
+                {{ field }}
+                {{ field.errors }}
+                {% endfor %}
+                {% comment %} <input required type="text" placeholder="Name" />
+                <input required type="email" placeholder="Email" />
+                <input type="text" placeholder="Phone no" />
+                <input required type="password" placeholder="Password" />
+                <input required type="password" placeholder="Re-enter Password" /> {% endcomment %}
+                <button type="submit" name="SgU">Sign up</button>
+            </form>
+            <form id="sign-in" method="POST">
+                <h2>Sign in</h2>
+                <div>Enter your details</div>
+                {% csrf_token %}
+                {% if msg %}
+                <small class='errorlist'>{{msg}}</small>
+                {% endif %}
+                {% for field in Logform %}
+                {{ field }}
+                {% endfor %}
+                {% comment %} <input required type="text" id="username" placeholder="Username" name="username"/>
+                <input required type="password" id="password" placeholder="Password" name="password"/>                 {% endcomment %}
+                <button type="submit" name="SgI">Sign In</button>
+            </form>
+
+        </div>
+    </article>
+    <article style="position:absolute;z-index:1;">
+    <form method="GET" style='margin:10px;'>
+    {% csrf_token %}
+    <div>Filter car &nbsp
+    {% for field in sh %}    
+    {{ field }}
+    {% endfor %}
+    <button name="SRH"type="submit">search</button>
+    </div>
+    <form/>
+    
+    {% if opt%}
+    {% for object in DispCars %}
+    {% if object.id not in checkP %}
+    {% if object.make in opt%}
+    
+    <div class="cool_boxes">
+          <img src={{ object.car_image.url }} />
+          <p>{{ object.make }}</p>
+          <p>ksh {{ object.price_per_day }} per day</p>
+          <p><form method="GET" style='margin:0px;padding:0px'>
+          {% csrf_token %}
+          <button type="submit" value='{{ object.pk }}'onclick="allowBooking()" name="DispBook">Select</button>
+          </form></p>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}  
+
+    {% elif opt is False %}
+      <p class="errorlist"> could not find car</p>
+    {% else %}
+    {% for object in DispCars %}
+    {% if object.id not in checkP %}
+
+    <div class="cool_boxes">
+          <img src={{ object.car_image.url }} />
+          <p>{{ object.make }}</p>
+          <p>ksh {{ object.price_per_day }} per day</p>
+          <p><form method="GET" style='margin:0px;padding:0px'>
+          <button type="submit" value='{{ object.pk }}'onclick="allowBooking()" name="DispBook">Select</button>
+          </form></p>
+    </div>
+    {% endif %}
+    {% endfor %}  
+      {% endif %}
+      
+        {% comment %} <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button onclick="allowBooking()">Select</button></p>
+        </div>
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div><div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+
+<div class="cool_boxes">                                                                                                                                                                                                                                                                                                                                
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div> {% endcomment %}
+        </article>
+        <article id="bookForm">
+        {% if Lender %}
+
+        <form method='POST' class="Req_box">
+        {% csrf_token %}
+         <span id='closingBook' class="closing">&times;</span>          
+          <p><h2>Reserve car</h2></p> 
+          {{ DateB.cars }}
+          {{ DateB.cars.errors }}       
+          <p>Rental Service provider</p> 
+          {{ DateB.user }}
+          {{ DateB.user.errors }} 
+          <p>pick up location {{ DateB.cars.location }}<p>      
+           <p><b><u>to contact rentee Email {{ Lender }}</u></b></p>   
+          <p>pickup date</p> 
+          {{ DateB.Pick_up_date}}
+          {{ DateB.Pick_up_date.errors }}
+          <p>Return date</p>
+          {{ DateB.Return_date }}
+          {{ DateB.Return_date.errrors }}
+          <p><button type="submit" name="BK" onclick="">send request</button></p>
+          {% comment %}
+          Date input normalises to format yyyy-mm-dd
+          {% endcomment %}
+        </form>
+
+       
+    {% endif %}
+        
+        
+        </article>
+        
+   
+{% endblock content %}

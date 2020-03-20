@@ -1,0 +1,5 @@
+pic=request.POST.get('pic')
+        mak=request.POST.get('mak')
+        user=user_id
+        pri=request.POST.get('pri')
+        Cform=owned_cars(car_image=pic,make=mak,price_per_day=pri,user=user)

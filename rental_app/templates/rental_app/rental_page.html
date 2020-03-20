@@ -1,0 +1,96 @@
+{% extends 'rental_app/base.html' %} 
+{% block content %}
+<article
+  class="navbar" style="position:relative;">
+  <ul style="display:flex;align-items:center;justify-content:flex-end;width:100%"  >
+    <li style="margin-right:auto">Car Rental</li>
+    <li style="padding:10px">Welcome Back {{ request.user }}</li>
+    <li><form method="POST">
+    {% csrf_token %}
+    <button id="send_logout"type="submit" name="logout">logout</button>
+    </form></li>
+    {% comment %} <li><a href="{% url 'rental_app-home' %}">logout</a></li> {% endcomment %}
+  </ul>
+</article>
+<article style="display:flex;justify-content:center;heigth:auto;">
+  <aside id="sideBar">
+    <ul>
+      <li id="Prof">Profile</li>
+      <li id="SubD">Submit details</li>
+      <li id="CheckReq">Check requests</li> 
+    </ul>
+  </aside>
+  <aside id="RentDet">
+ 
+    <form style="position: absolute;" id="SubDet" method="POST" enctype="multipart/form-data" >
+       {% csrf_token %}
+      <h2>Add more cars for hire to your profile </h2>
+      <p>user</p>
+      {{ CarForm.user }}
+      <p>Picture of car</p>
+      {{ CarForm.car_image }}
+      {{ CarForm.car_image.errors }}
+      <p>Make of car</p>
+       {{ CarForm.make }}  
+       {{ CarForm.make.errors }}   
+      <p>Price per day</p>
+      {{ CarForm.price_per_day }}
+      {{ CarForm.price_per_day.errors }}
+      <p>present location</p>
+      {{ CarForm.location}}
+      {{ CarForm.errors }}
+      <br/>
+      <p><button type="submit" name="Det" onclick="location.reload()">submit</button></p>
+    </form>
+
+  <div style="position:absolute;" id="CProfile">
+    <h2>Here are the cars in your profile</h2>
+    {% for object in car_disp%}
+    <div class="cool_boxes">
+          <img src={{ object.car_image.url }} />
+          <p>{{ object.make }}</p>
+          <p>ksh {{ object.price_per_day }} per day</p>
+          <p><form method='GET' style='padding:0px;margine:0px'>
+          <button name='Delete' value='{{ object.id }}'>Delete</button>
+          </form>
+          </p>
+        </div>
+    {% endfor %}
+
+        {% comment %} <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div><div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div> {% endcomment %}
+
+        
+    </div>
+
+  <div style="position:absolute;" id="CReq">
+    <h2>Here are your booking requests</h2>
+    {% if reqc%}
+    {% for obj in reqc%}
+  
+    <div class="cool_boxes" style="width: 250px;height: 370px;">
+          <img src={{ obj.cars.car_image.url }} />
+          <p>{{ obj.cars.make }}</p>
+          <p>pick up date {{ obj.Pick_up_date}} </p>
+          <p>Return date {{ obj.Return_date}}</p>
+          <p><form method='GET' style='padding:0px;margine:0px'>
+          <button name='available' value='{{ obj.id }}' onclick="reload()">Release</button>
+          </form>
+          </p>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+  </aside>
+</article>
+
+{% endblock %}

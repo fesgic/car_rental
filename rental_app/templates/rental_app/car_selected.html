@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .cool_boxes {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 300px;
+        left: 0;
+        padding: 20px;
+        padding-top: 10px;
+        color: #111;
+        background: #ddd;
+        align-items: center;
+        /*overflow: hidden;*/
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+          0 10px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        float: left;
+        margin: 40px;
+      }
+      .cool_boxes p {
+        position: relative;
+        font-size: 1em;
+        font-weight: bold;
+        padding: 1px;
+      }
+      .cool_boxes img {
+        position: relative;
+        top: 0;
+        width: 170px;
+        height: 100px;
+        display: flex;
+        margin: 15px;
+      }
+      .cool_boxes img:hover {
+        transform: scale(1.1);
+        transition-duration: 0.5s;
+      }
+      .cool_boxes button {
+        position: sticky;
+        border-radius: 2px;
+        left: 70px;
+        bottom: 0%;
+        height: 30px;
+        width: 150px;
+      }
+      .Req_box {
+        right:0px ;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        align-items:flex-start;
+        border-radius: 20px;
+        background: linear-gradient(to bottom, #efefef, #ccc);
+        width: 400px;
+        height: 450px;
+        left: 0;
+        padding: 20px;
+        padding-top: 10px;
+      }
+      .Req_box h2{
+        margin: 0;
+        padding: 0;
+      }
+      .Req_box input{
+        padding: 8px 15px;
+        height: 35px;
+        width: 360px;        
+        margin: 6px 0;
+        overflow: hidden;
+      }
+      .Req_box button{
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: 1px solid #8f0a84;
+        background-color: #861b78;
+        color: #fff;
+        padding: 10px 20px;
+        margin-left: 80px;
+        width: 210px;        
+        letter-spacing: 1px;
+        left: 20px;
+      }
+      .Req_box button:active {
+  transform: scale(0.9);
+}
+
+.Req_box button:focus {
+  outline: none;
+}
+
+    </style>
+  </head>
+  <body>
+    <article style="display:flex;flex-direction:row;">
+      <section
+        style="width:10%;height:100%;position:relative;background:#cccaca"
+      >
+        hhh
+      </section>
+      <section style="width:80%;height:100%;position:relative;">
+        <div>
+          <img/>
+          <p>rentee email address</p>
+        </div>
+        <form class="Req_box">
+          
+          <p><h2>Reserve car</h2></p>
+          <p>pickup location Nairobi</p>
+          <p><b><u>to contact rentee call 999999999</u></b></p>
+          <p>pickup date</p>
+          <input type="date" />
+          <p>Return date</p>
+          <input type="date" />
+          <p><button type="submit">send request</button></p>
+          
+        </form>
+        <!-- <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div>
+        <div class="cool_boxes">
+          <img src="titan.png" />
+          <p>subaru impreza</p>
+          <p>ksh 2000 per day</p>
+          <p><button>Select</button></p>
+        </div> -->
+      </section>
+    </article>
+  </body>
+</html>

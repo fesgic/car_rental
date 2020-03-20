@@ -1,0 +1,250 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="{% static 'css/project.css' %}"> -->
+    <title>car_rental</title>
+    <style>
+        .container {
+            position: fixed;
+            display: block;
+            width: 768px;
+            height: 480px;
+            left: 25%;
+            top:10%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .2),
+                0 10px 10px rgba(0, 0, 0, .2);
+            background: linear-gradient(to bottom, #efefef, #ccc);
+
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            margin: 20px;
+        }
+
+        a {
+            color: #222;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+        .overlay-container{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform .5s ease-in-out;
+            z-index: 100;
+        }
+
+       .overlay {
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            background: linear-gradient(to bottom right, #e484dc, #630152);
+            color: #fff;
+            transform: translateX(0);
+            transition: transform .5s ease-in-out;
+
+        }
+
+        .overlay-left {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 70px 40px;
+            width: calc(50%-80px);
+            height: calc(100% - 140px);
+            text-align: center;
+            transform: translate(0);
+            transition: transform .5s ease-in-out;
+
+        }
+
+        .overlay-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 70px 40px;
+            width: calc(50%-80px);
+            height: calc(100% - 140px);
+            text-align: center;
+            transform: translate(0);
+            transition: transform .5s ease-in-out;
+
+        }
+
+       .container button {
+            border-radius: 20px;
+            border: 1px solid #8f0a84;
+            background-color: #861b78;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 40px;
+            letter-spacing: 1px;
+
+        }
+
+       .container button:active {
+            transform: scale(.9);
+
+        }
+
+       .container button:focus {
+            outline: none;
+
+        }
+
+       .container button.invert {
+            background-color: transparent;
+            border-color: #fff;
+
+        }
+
+       .container form {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 90px 60px;
+            width: calc(50% - 120px);
+            height: calc(100% - 180px);
+            text-align: center;
+            background: linear-gradient(to bottom, #ebe8e8, rgb(150, 138, 138));
+            transition: all .5s ease-in-out;
+        }
+
+       .container div {
+            font-size: 1rem;
+        }
+
+        .container input {
+            background-color: #eee;
+            border: none;
+            padding: 8px 15px;
+            margin: 6px 0;
+            width: calc(100% - 30px);
+            border-radius: 15px;
+            border-bottom: 1px solid #ddd;
+            box-shadow: insert 0 1px 2px rgba(0, 0, 0, .4),
+                0 -1px 1px #fff,
+                0 1px 0 #fff;
+            overflow: hidden;
+        }
+
+       .container input:focus {
+            outline: none;
+            background-color: #fff;
+
+        }
+
+        .sign-in {
+            left: 0;
+            z-index: 2;
+
+          /* transform: translatex(100%); -*/
+        }
+
+        .sign-up {
+            left: 0;
+            z-index: 1;
+            opacity: 100;
+        }
+    </style>
+
+</head>
+
+<body>
+    <article>
+        <div class="container" >
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-left">
+                        <h2>Welcome Back!</h2>
+                        <p>Please login with your personal info</p>
+                        <button id="signInBtn" class="invert">Sign In</button>
+                    </div>
+                    <div class="overlay-right">
+                        <h2>Hellow, Friend !</h2>
+                        <p>Please enter your personal details</p>
+                        <button id="signUpBtn" class="invert">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <form class="sign-up" action="#">
+                <h2>Create login</h2>
+                <div>Use your email for registration </div>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button >Sign up</button>
+            </form>
+            <form class="sign-in" action="#">
+                <h2>Sign in</h2>
+                <div>Use your email for registration </div>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <a href="#">Forgot Password</a>
+                <button>Sign In</button>
+            </form>
+
+        </div>
+    </article>
+</body>
+<script>
+    
+    const signIn = document.querySelector('.sign-in');
+    const signUp = document.querySelector('.sign-up');
+    const OverC = document.querySelector('.overlay-container');
+    const Over = document.querySelector('.overlay');
+    const OverLf = document.querySelector('.overlay-left');
+    const OverRg = document.querySelector('.overlay-right');
+
+    
+    const signUpBtn = document.getElementById('signUpBtn');
+    const signInBtn = document.getElementById('signInBtn');
+    signUpBtn.addEventListener('click',()=>{
+        signIn.style.zIndex='5';
+        signUp.style.zIndex= '10';         
+        
+        signIn.style.transform='translateX(100%)';
+        signUp.style.transform='translateX(100%)';
+        /*OverC.style.tranform = 'translateX(-100%)';*/
+        OverC.style.transform='translateX(-100%)';
+        Over.style.transform='translateX(50%)';
+              
+    })
+    signInBtn.addEventListener('click',()=>{
+        signIn.style.zIndex='10';
+        signUp.style.zIndex= '5'; 
+        signIn.style.transform='translateX(0)';
+        signUp.style.transform='translateX(0)';
+        /*OverC.style.tranform = 'translateX(-100%)';*/
+        OverC.style.transform='translateX(0)';
+        Over.style.transform='translateX(0)';
+              
+    })
+    
+</script>
+
+</html>
